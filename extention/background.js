@@ -16,7 +16,7 @@ function timerTick()
 {
     setTimeout(function () {
         var clip = getTextFromClipboard();
-        if (clip != lastClipValue
+        if (clip != lastClipValue &&
             (clip.indexOf('http://') === 0 || clip.indexOf('https://') === 0) &&
             clip.indexOf(' ') === -1)
         {
