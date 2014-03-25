@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+
+    "name": "Open From Clipboard",
+    "description": "Open a new tab for every url that is copied to the clipboard",
+    "version": "1.0",
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "author": "ShaLi",
+    "icons": {
+        "48": "icon_48.png"
+    },
+
+    "permissions": [
+        "clipboardRead",
+        "tabs"
+    ]
+}
