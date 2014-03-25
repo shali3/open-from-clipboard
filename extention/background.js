@@ -1,6 +1,6 @@
 var textInput = document.createElement("input");
 document.body.appendChild(textInput);
-var lastOpenedurl = null;
+var lastClipValue = null;
 
 function getTextFromClipboard()
 {
@@ -10,22 +10,22 @@ function getTextFromClipboard()
     return textInput.value.trim();
 }
 
-lastOpenedurl = getTextFromClipboard();
+lastClipValue = getTextFromClipboard();
 
 function timerTick()
 {
     setTimeout(function () {
         var clip = getTextFromClipboard();
-        if (clip != lastOpenedurl &&
+        if (clip != lastClipValue
             (clip.indexOf('http://') === 0 || clip.indexOf('https://') === 0) &&
             clip.indexOf(' ') === -1)
         {
+            lastClipValue = clip;
             chrome.tabs.getSelected(null, function (tab) {
-                lastOpenedurl = clip;
                 if (tab == null || clip != tab.url)
                 {
-                    chrome.tabs.create({url: lastOpenedurl});
-                    console.log('Opened url ' + lastOpenedurl);
+                    chrome.tabs.create({url: lastClipValue});
+                    console.log('Opened url ' + lastClipValue);
                 }
                 else {
                     console.log('Not opening current tab url');
