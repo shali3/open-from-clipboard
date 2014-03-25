@@ -10,7 +10,8 @@
     },
     "author": "ShaLi",
     "icons": {
-        "48": "icon_48.png"
+        "48": "icon_48.png",
+        "128": "icon_128.png"
     },
 
     "permissions": [
