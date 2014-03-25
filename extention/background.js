@@ -16,22 +16,23 @@ function timerTick()
 {
     setTimeout(function () {
         var clip = getTextFromClipboard();
-        if (clip != lastClipValue &&
-            (clip.indexOf('http://') === 0 || clip.indexOf('https://') === 0) &&
-            clip.indexOf(' ') === -1)
+        if (clip != lastClipValue)
         {
             lastClipValue = clip;
-            chrome.tabs.getSelected(null, function (tab) {
-                if (tab == null || clip != tab.url)
-                {
-                    chrome.tabs.create({url: lastClipValue});
-                    console.log('Opened url ' + lastClipValue);
-                }
-                else {
-                    console.log('Not opening current tab url');
-                }
+            if ((clip.indexOf('http://') === 0 || clip.indexOf('https://') === 0) && clip.indexOf(' ') === -1)
+            {
+                chrome.tabs.getSelected(null, function (tab) {
+                    if (tab == null || clip != tab.url)
+                    {
+                        chrome.tabs.create({url: lastClipValue});
+                        console.log('Opened url ' + lastClipValue);
+                    }
+                    else {
+                        console.log('Not opening current tab url');
+                    }
 
-            });
+                });
+            }
         }
         timerTick();
     }, 1000);
